@@ -44,7 +44,7 @@ namespace MonicaExtra.Conrtroller
             {
                 if (e.RowIndex < 0) return;
                 var idEmpresa = (int)_view.dgvSelectEmpresa.Rows[e.RowIndex].Cells[0].Value;
-                GlobalVariables.empresaSeleccionada = _dbContext.empresas.FirstOrDefault(f => f.empresa_id == idEmpresa);
+                GlobalVariables._empresaSeleccionada = _dbContext.empresas.FirstOrDefault(f => f.empresa_id == idEmpresa);
                 new MenuModulo().Show();
                 _view.Hide();
             });

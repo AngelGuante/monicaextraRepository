@@ -111,6 +111,7 @@
     <Compile Include="Model\monicaextra\usuario.cs">
       <DependentUpon>monicaextra.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Reportes\CierreCaja.cs" />
     <Compile Include="Model\Reportes\MovimientoSeleccionado.cs" />
     <Compile Include="Utils\GlobalVariables.cs" />
     <Compile Include="Model\monica_global\empresa.cs">
@@ -213,6 +214,7 @@
     <None Include="Model\monica_global\monica_global.edmx.diagram">
       <DependentUpon>monica_global.edmx</DependentUpon>
     </None>
+    <None Include="Model\Reportes\MonicaExtra.Model.Reportes.MovimientoSeleccionado.datasource" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

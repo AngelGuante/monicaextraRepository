@@ -288,10 +288,7 @@ namespace MonicaExtra.Conrtroller
                     Fecha = objMovimientoSeleccionado.Fecha
                 };
 
-                List<Model.Reportes.MovimientoSeleccionado> movimiento = new List<Model.Reportes.MovimientoSeleccionado>
-                {
-                  ObjMovimiento
-                };
+                List<Model.Reportes.MovimientoSeleccionado> movimiento = new List<Model.Reportes.MovimientoSeleccionado> { ObjMovimiento };
 
                 if (_view.chbDatosFiscales.Checked)
                 {
@@ -301,6 +298,8 @@ namespace MonicaExtra.Conrtroller
                     ObjMovimiento.VSinItbis = objMovimientoSeleccionado.Neto.ToString();
                     ObjMovimiento.ITBISFacturado = objMovimientoSeleccionado.Itebis;
                 };
+
+                Utils.GlobalVariables.SetEmpresaValues(ObjMovimiento);
 
                 new MovimientoSeleccionado(movimiento).Show();
             });

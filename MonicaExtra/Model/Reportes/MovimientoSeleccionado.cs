@@ -1,6 +1,8 @@
-﻿namespace MonicaExtra.Model.Reportes
+﻿using MonicaExtra.Model.monica_global;
+
+namespace MonicaExtra.Model.Reportes
 {
-    public class MovimientoSeleccionado
+    public class MovimientoSeleccionado : empresa
     {
         public string NroTransaccion { get; set; }
         public string Beneficiario { get; set; }
