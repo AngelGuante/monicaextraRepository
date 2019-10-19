@@ -1,5 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="monica10Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="usuarios">
+    <Key>
+      <PropertyRef Name="id_usuario" />
+    </Key>
+    <Property Name="id_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="usuario" Type="varchar" MaxLength="50" />
+    <Property Name="clave" Type="varchar(max)" />
+    <Property Name="categoria" Type="varchar" MaxLength="20" />
+    <Property Name="activo" Type="bit" />
+    <Property Name="nombre_completo" Type="varchar" MaxLength="200" />
+    <Property Name="animal" Type="varchar(max)" />
+    <Property Name="plato" Type="varchar(max)" />
+  </EntityType>
   <EntityType Name="cierrecaja">
     <Key>
       <PropertyRef Name="NumeroCierre" />
@@ -18,7 +31,7 @@
     </Key>
     <Property Name="NumeroTransacion" Type="smallint" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="54" />
-    <Property Name="Tipo" Type="varchar" MaxLength="13" />
+    <Property Name="Tipo" Type="varchar" MaxLength="1" />
   </EntityType>
   <EntityType Name="clasificacionmovicaja">
     <Key>
@@ -57,6 +70,7 @@
     <Property Name="NumeroCierre" Type="smallint" />
   </EntityType>
   <EntityContainer Name="monica10ModelStoreContainer">
+    <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="cierrecaja" EntityType="Self.cierrecaja" Schema="monicaextra" store:Type="Tables" />
     <EntitySet Name="clasificacionfiscal" EntityType="Self.clasificacionfiscal" Schema="monicaextra" store:Type="Tables" />
     <EntitySet Name="clasificacionmovicaja" EntityType="Self.clasificacionmovicaja" Schema="monicaextra" store:Type="Tables" />

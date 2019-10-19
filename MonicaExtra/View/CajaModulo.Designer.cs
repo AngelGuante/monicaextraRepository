@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CajaModulo));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
@@ -67,8 +68,9 @@
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.btnAtras = new System.Windows.Forms.Button();
             this.btnHacerCuadre = new System.Windows.Forms.Button();
-            this.btnReporteAImprimir = new System.Windows.Forms.Button();
+            this.btnMovimientoAImprimir = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -100,8 +102,9 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.btnAtras);
             this.splitContainer1.Panel2.Controls.Add(this.btnHacerCuadre);
-            this.splitContainer1.Panel2.Controls.Add(this.btnReporteAImprimir);
+            this.splitContainer1.Panel2.Controls.Add(this.btnMovimientoAImprimir);
             this.splitContainer1.Size = new System.Drawing.Size(1028, 593);
             this.splitContainer1.SplitterDistance = 543;
             this.splitContainer1.TabIndex = 0;
@@ -419,7 +422,7 @@
             // 
             // dtpFechaHasta
             // 
-            this.dtpFechaHasta.Location = new System.Drawing.Point(424, 4);
+            this.dtpFechaHasta.Location = new System.Drawing.Point(303, 28);
             this.dtpFechaHasta.Name = "dtpFechaHasta";
             this.dtpFechaHasta.Size = new System.Drawing.Size(196, 20);
             this.dtpFechaHasta.TabIndex = 14;
@@ -427,7 +430,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(379, 7);
+            this.label14.Location = new System.Drawing.Point(254, 35);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(43, 13);
             this.label14.TabIndex = 13;
@@ -436,7 +439,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(131, 6);
+            this.label13.Location = new System.Drawing.Point(2, 32);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(44, 13);
             this.label13.TabIndex = 12;
@@ -445,7 +448,7 @@
             // cmbbFiltroSeleccionado
             // 
             this.cmbbFiltroSeleccionado.FormattingEnabled = true;
-            this.cmbbFiltroSeleccionado.Location = new System.Drawing.Point(0, 29);
+            this.cmbbFiltroSeleccionado.Location = new System.Drawing.Point(127, 3);
             this.cmbbFiltroSeleccionado.Name = "cmbbFiltroSeleccionado";
             this.cmbbFiltroSeleccionado.Size = new System.Drawing.Size(327, 21);
             this.cmbbFiltroSeleccionado.TabIndex = 11;
@@ -453,16 +456,16 @@
             // 
             // btnBuscarMovimientos
             // 
-            this.btnBuscarMovimientos.Location = new System.Drawing.Point(627, 3);
+            this.btnBuscarMovimientos.Location = new System.Drawing.Point(505, 28);
             this.btnBuscarMovimientos.Name = "btnBuscarMovimientos";
-            this.btnBuscarMovimientos.Size = new System.Drawing.Size(75, 23);
+            this.btnBuscarMovimientos.Size = new System.Drawing.Size(50, 23);
             this.btnBuscarMovimientos.TabIndex = 6;
             this.btnBuscarMovimientos.Text = "Buscar";
             this.btnBuscarMovimientos.UseVisualStyleBackColor = true;
             // 
             // dtpFechaDesde
             // 
-            this.dtpFechaDesde.Location = new System.Drawing.Point(177, 3);
+            this.dtpFechaDesde.Location = new System.Drawing.Point(52, 29);
             this.dtpFechaDesde.Name = "dtpFechaDesde";
             this.dtpFechaDesde.Size = new System.Drawing.Size(196, 20);
             this.dtpFechaDesde.TabIndex = 4;
@@ -481,33 +484,45 @@
             // 
             this.btnLimpiarCampos.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnLimpiarCampos.Enabled = false;
-            this.btnLimpiarCampos.Location = new System.Drawing.Point(756, 0);
+            this.btnLimpiarCampos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLimpiarCampos.Image = ((System.Drawing.Image)(resources.GetObject("btnLimpiarCampos.Image")));
+            this.btnLimpiarCampos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLimpiarCampos.Location = new System.Drawing.Point(683, 0);
             this.btnLimpiarCampos.Name = "btnLimpiarCampos";
-            this.btnLimpiarCampos.Size = new System.Drawing.Size(75, 55);
+            this.btnLimpiarCampos.Size = new System.Drawing.Size(100, 55);
             this.btnLimpiarCampos.TabIndex = 2;
             this.btnLimpiarCampos.Text = "Limpiar Campos";
+            this.btnLimpiarCampos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnLimpiarCampos.UseVisualStyleBackColor = true;
             // 
             // btnModificar
             // 
             this.btnModificar.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnModificar.Enabled = false;
-            this.btnModificar.Location = new System.Drawing.Point(831, 0);
+            this.btnModificar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnModificar.Image = ((System.Drawing.Image)(resources.GetObject("btnModificar.Image")));
+            this.btnModificar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnModificar.Location = new System.Drawing.Point(783, 0);
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(83, 55);
+            this.btnModificar.Size = new System.Drawing.Size(115, 55);
             this.btnModificar.TabIndex = 1;
             this.btnModificar.Text = "Modificar";
+            this.btnModificar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnModificar.UseVisualStyleBackColor = true;
             // 
             // btnGuardar
             // 
             this.btnGuardar.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnGuardar.Enabled = false;
-            this.btnGuardar.Location = new System.Drawing.Point(914, 0);
+            this.btnGuardar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
+            this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnGuardar.Location = new System.Drawing.Point(898, 0);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(114, 55);
+            this.btnGuardar.Size = new System.Drawing.Size(130, 55);
             this.btnGuardar.TabIndex = 0;
             this.btnGuardar.Text = "Guardar Movimiento";
+            this.btnGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnGuardar.UseVisualStyleBackColor = true;
             // 
             // dataGridView1
@@ -520,26 +535,48 @@
             this.dataGridView1.Size = new System.Drawing.Size(1028, 226);
             this.dataGridView1.TabIndex = 0;
             // 
+            // btnAtras
+            // 
+            this.btnAtras.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnAtras.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAtras.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnAtras.Image = ((System.Drawing.Image)(resources.GetObject("btnAtras.Image")));
+            this.btnAtras.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAtras.Location = new System.Drawing.Point(0, 0);
+            this.btnAtras.Name = "btnAtras";
+            this.btnAtras.Size = new System.Drawing.Size(108, 46);
+            this.btnAtras.TabIndex = 2;
+            this.btnAtras.Text = "Atras";
+            this.btnAtras.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAtras.UseVisualStyleBackColor = true;
+            // 
             // btnHacerCuadre
             // 
             this.btnHacerCuadre.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnHacerCuadre.Location = new System.Drawing.Point(914, 0);
+            this.btnHacerCuadre.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHacerCuadre.Image = ((System.Drawing.Image)(resources.GetObject("btnHacerCuadre.Image")));
+            this.btnHacerCuadre.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnHacerCuadre.Location = new System.Drawing.Point(673, 0);
             this.btnHacerCuadre.Name = "btnHacerCuadre";
-            this.btnHacerCuadre.Size = new System.Drawing.Size(114, 46);
+            this.btnHacerCuadre.Size = new System.Drawing.Size(164, 46);
             this.btnHacerCuadre.TabIndex = 1;
             this.btnHacerCuadre.Text = "Hacer Cuadre";
+            this.btnHacerCuadre.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnHacerCuadre.UseVisualStyleBackColor = true;
             // 
-            // btnReporteAImprimir
+            // btnMovimientoAImprimir
             // 
-            this.btnReporteAImprimir.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnReporteAImprimir.Enabled = false;
-            this.btnReporteAImprimir.Location = new System.Drawing.Point(0, 0);
-            this.btnReporteAImprimir.Name = "btnReporteAImprimir";
-            this.btnReporteAImprimir.Size = new System.Drawing.Size(154, 46);
-            this.btnReporteAImprimir.TabIndex = 0;
-            this.btnReporteAImprimir.Text = "Reporte de movimientos a imprimir";
-            this.btnReporteAImprimir.UseVisualStyleBackColor = true;
+            this.btnMovimientoAImprimir.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnMovimientoAImprimir.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMovimientoAImprimir.Image = ((System.Drawing.Image)(resources.GetObject("btnMovimientoAImprimir.Image")));
+            this.btnMovimientoAImprimir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMovimientoAImprimir.Location = new System.Drawing.Point(837, 0);
+            this.btnMovimientoAImprimir.Name = "btnMovimientoAImprimir";
+            this.btnMovimientoAImprimir.Size = new System.Drawing.Size(191, 46);
+            this.btnMovimientoAImprimir.TabIndex = 0;
+            this.btnMovimientoAImprimir.Text = "Imprimir Reporte";
+            this.btnMovimientoAImprimir.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnMovimientoAImprimir.UseVisualStyleBackColor = true;
             // 
             // CajaModulo
             // 
@@ -591,7 +628,7 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.SplitContainer splitContainer3;
         public System.Windows.Forms.DataGridView dataGridView1;
-        public System.Windows.Forms.Button btnReporteAImprimir;
+        public System.Windows.Forms.Button btnMovimientoAImprimir;
         public System.Windows.Forms.TextBox txtbConcepto;
         public System.Windows.Forms.DateTimePicker dtpEmicion;
         public System.Windows.Forms.TextBox txtbValorSNITBIS;
@@ -615,5 +652,6 @@
         public System.Windows.Forms.DateTimePicker dtpFechaHasta;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
+        public System.Windows.Forms.Button btnAtras;
     }
 }

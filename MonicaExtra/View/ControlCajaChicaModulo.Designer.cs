@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ControlCajaChicaModulo));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -37,6 +38,7 @@
             this.btnAnterior = new System.Windows.Forms.Button();
             this.btnPrimero = new System.Windows.Forms.Button();
             this.btnMovimientos = new System.Windows.Forms.Button();
+            this.btnAtras = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -62,6 +64,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.splitContainer1.Panel2.Controls.Add(this.btnAtras);
             this.splitContainer1.Panel2.Controls.Add(this.btnMovimientos);
             this.splitContainer1.Size = new System.Drawing.Size(1028, 593);
             this.splitContainer1.SplitterDistance = 533;
@@ -151,13 +154,32 @@
             // 
             // btnMovimientos
             // 
-            this.btnMovimientos.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnMovimientos.Location = new System.Drawing.Point(0, 0);
+            this.btnMovimientos.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnMovimientos.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMovimientos.Image = ((System.Drawing.Image)(resources.GetObject("btnMovimientos.Image")));
+            this.btnMovimientos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMovimientos.Location = new System.Drawing.Point(813, 0);
             this.btnMovimientos.Name = "btnMovimientos";
-            this.btnMovimientos.Size = new System.Drawing.Size(100, 56);
+            this.btnMovimientos.Size = new System.Drawing.Size(215, 56);
             this.btnMovimientos.TabIndex = 0;
             this.btnMovimientos.Text = "Movimientos de Caja";
+            this.btnMovimientos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnMovimientos.UseVisualStyleBackColor = true;
+            // 
+            // btnAtras
+            // 
+            this.btnAtras.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnAtras.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAtras.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnAtras.Image = ((System.Drawing.Image)(resources.GetObject("btnAtras.Image")));
+            this.btnAtras.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAtras.Location = new System.Drawing.Point(0, 0);
+            this.btnAtras.Name = "btnAtras";
+            this.btnAtras.Size = new System.Drawing.Size(108, 56);
+            this.btnAtras.TabIndex = 1;
+            this.btnAtras.Text = "Atras";
+            this.btnAtras.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAtras.UseVisualStyleBackColor = true;
             // 
             // ControlCajaChicaModulo
             // 
@@ -192,5 +214,6 @@
         public System.Windows.Forms.Button btnAnterior;
         public System.Windows.Forms.Button btnPrimero;
         public System.Windows.Forms.Label lblPages;
+        public System.Windows.Forms.Button btnAtras;
     }
 }

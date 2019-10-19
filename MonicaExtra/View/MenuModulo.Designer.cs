@@ -28,16 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuModulo));
             this.btnMenuControlCajaChica = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnMenuControlCajaChica
             // 
+            this.btnMenuControlCajaChica.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMenuControlCajaChica.Image = ((System.Drawing.Image)(resources.GetObject("btnMenuControlCajaChica.Image")));
+            this.btnMenuControlCajaChica.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnMenuControlCajaChica.Location = new System.Drawing.Point(0, 0);
             this.btnMenuControlCajaChica.Name = "btnMenuControlCajaChica";
-            this.btnMenuControlCajaChica.Size = new System.Drawing.Size(131, 81);
+            this.btnMenuControlCajaChica.Size = new System.Drawing.Size(225, 81);
             this.btnMenuControlCajaChica.TabIndex = 0;
             this.btnMenuControlCajaChica.Text = "Control de Caja Chica";
+            this.btnMenuControlCajaChica.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnMenuControlCajaChica.UseVisualStyleBackColor = true;
             // 
             // MenuModulo

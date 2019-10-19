@@ -32,5 +32,15 @@ namespace MonicaExtra.Properties {
                 return ((string)(this["monicaextraConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=MIKI\\MONICA10;Initial Catalog=monica10;Integrated Security=True")]
+        public string monica10_reportsConnectionString {
+            get {
+                return ((string)(this["monica10_reportsConnectionString"]));
+            }
+        }
     }
 }

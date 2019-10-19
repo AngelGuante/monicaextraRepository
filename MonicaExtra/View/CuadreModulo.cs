@@ -9,7 +9,7 @@ namespace MonicaExtra.View
         {
             InitializeComponent();
             CenterToScreen();
-            new CuadreModuloController(this, monicaextraDataSet, caja);
+            //new CuadreModuloController(this, monicaextraDataSet, caja);
         }
     }
 }

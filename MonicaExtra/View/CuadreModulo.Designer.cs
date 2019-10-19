@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.cierrecajaBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.monicaextraDataSet = new MonicaExtra.Model.Reportes.monicaextraDataSet();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -42,23 +41,12 @@
             this.monicaextraDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnAtras = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.cierrecajaBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.monicaextraDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.monicaextraDataSetBindingSource)).BeginInit();
             this.SuspendLayout();
-            // 
-            // cierrecajaBindingSource
-            // 
-            this.cierrecajaBindingSource.DataMember = "cierrecaja";
-            this.cierrecajaBindingSource.DataSource = this.monicaextraDataSet;
-            // 
-            // monicaextraDataSet
-            // 
-            this.monicaextraDataSet.DataSetName = "monicaextraDataSet";
-            this.monicaextraDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // splitContainer1
             // 
@@ -137,11 +125,6 @@
             this.reportViewer1.Size = new System.Drawing.Size(994, 577);
             this.reportViewer1.TabIndex = 1;
             // 
-            // monicaextraDataSetBindingSource
-            // 
-            this.monicaextraDataSetBindingSource.DataSource = this.monicaextraDataSet;
-            this.monicaextraDataSetBindingSource.Position = 0;
-            // 
             // btnAtras
             // 
             this.btnAtras.Location = new System.Drawing.Point(3, 23);
@@ -161,7 +144,6 @@
             this.Name = "CuadreModulo";
             this.Text = "CuadreModulo";
             ((System.ComponentModel.ISupportInitialize)(this.cierrecajaBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.monicaextraDataSet)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -174,7 +156,6 @@
 
         #endregion
         private System.Windows.Forms.BindingSource cierrecajaBindingSource;
-        private Model.Reportes.monicaextraDataSet monicaextraDataSet;
         private System.Windows.Forms.BindingSource monicaextraDataSetBindingSource;
         private System.Windows.Forms.SplitContainer splitContainer1;
         public Microsoft.Reporting.WinForms.ReportViewer reportViewer1;

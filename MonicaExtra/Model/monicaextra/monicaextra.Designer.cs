@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Angel\source\repos\MonicaExtra\MonicaExtra\Model\monicaextra\monicaextra.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Angel\source\repos\monicaextraRepository\MonicaExtra\Model\monicaextra\monicaextra.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

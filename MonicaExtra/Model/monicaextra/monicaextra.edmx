@@ -4,7 +4,20 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="monica10Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="monica10Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="usuarios">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="usuario" Type="varchar" MaxLength="50" />
+          <Property Name="clave" Type="varchar(max)" />
+          <Property Name="categoria" Type="varchar" MaxLength="20" />
+          <Property Name="activo" Type="bit" />
+          <Property Name="nombre_completo" Type="varchar" MaxLength="200" />
+          <Property Name="animal" Type="varchar(max)" />
+          <Property Name="plato" Type="varchar(max)" />
+        </EntityType>
         <EntityType Name="cierrecaja">
           <Key>
             <PropertyRef Name="NumeroCierre" />
@@ -23,7 +36,7 @@
           </Key>
           <Property Name="NumeroTransacion" Type="smallint" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="54" />
-          <Property Name="Tipo" Type="varchar" MaxLength="13" />
+          <Property Name="Tipo" Type="varchar" MaxLength="1" />
         </EntityType>
         <EntityType Name="clasificacionmovicaja">
           <Key>
@@ -62,13 +75,13 @@
           <Property Name="NumeroCierre" Type="smallint" />
         </EntityType>
         <EntityContainer Name="monica10ModelStoreContainer">
+          <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cierrecaja" EntityType="Self.cierrecaja" Schema="monicaextra" store:Type="Tables" />
           <EntitySet Name="clasificacionfiscal" EntityType="Self.clasificacionfiscal" Schema="monicaextra" store:Type="Tables" />
           <EntitySet Name="clasificacionmovicaja" EntityType="Self.clasificacionmovicaja" Schema="monicaextra" store:Type="Tables" />
           <EntitySet Name="movimientocaja" EntityType="Self.movimientocaja" Schema="monicaextra" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="monica10Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -90,7 +103,7 @@
           </Key>
           <Property Name="NumeroTransacion" Type="Int16" Nullable="false" />
           <Property Name="Descripcion" Type="String" MaxLength="54" FixedLength="false" Unicode="false" />
-          <Property Name="Tipo" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="Tipo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="clasificacionmovicaja">
           <Key>
@@ -133,7 +146,21 @@
           <EntitySet Name="clasificacionfiscals" EntityType="Self.clasificacionfiscal" />
           <EntitySet Name="clasificacionmovicajas" EntityType="Self.clasificacionmovicaja" />
           <EntitySet Name="movimientocajas" EntityType="Self.movimientocaja" />
+          <EntitySet Name="usuarios" EntityType="monica10Model.usuario" />
         </EntityContainer>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="usuario1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="clave" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="categoria" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="activo" Type="Boolean" />
+          <Property Name="nombre_completo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="animal" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="plato" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -197,6 +224,20 @@
                 <ScalarProperty Name="Estatus" ColumnName="Estatus" />
                 <ScalarProperty Name="Clasificancf" ColumnName="Clasificancf" />
                 <ScalarProperty Name="NumeroCierre" ColumnName="NumeroCierre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuarios">
+            <EntityTypeMapping TypeName="monica10Model.usuario">
+              <MappingFragment StoreEntitySet="usuarios">
+                <ScalarProperty Name="plato" ColumnName="plato" />
+                <ScalarProperty Name="animal" ColumnName="animal" />
+                <ScalarProperty Name="nombre_completo" ColumnName="nombre_completo" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="categoria" ColumnName="categoria" />
+                <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="usuario1" ColumnName="usuario" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

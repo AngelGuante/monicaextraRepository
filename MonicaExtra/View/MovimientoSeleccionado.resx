@@ -117,42 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnAtras.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
-        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAB3RJ
-        TUUH4woMFQEEWPnwVgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAADwSURBVFhH
-        7ZYxCsIwFIajoINNHMSDCB5CRwdPIeoZegJxE4cmHZy6SBchiZu4eZruWp/6Cg6hXXxVJB9k6g/fBy2h
-        7OOEYVNIu+LSZlyatLc7dPFJDYA8kDYCcf52zixJ2rggxC3Ho6e4IqJUbm6dWA9xSUCFnCu7wCUBed7g
-        ymwc4pdc6iUuCfByL/fy/5cD37vhAJCPHOJ65A8CdRw75BigZzgjBN6/kCZ2BNQY8fy7KYmQdo5LQnxE
-        gY8o8BEFPqKgKuIHbsxroMwAl4SURAilJ7gixh1xYttLCxc1ABEgXcMHmPHI7vtRKvCJA8buke5GCn82
-        YwoAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="btnMovimientos.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
-        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAB3RJ
-        TUUH4woMFx4WZZ5b7gAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAQGSURBVFhH
-        vVdLaBRBEB0/qNmZSeJBchFFQUVRxIsnJR5EiR4EQRFEiIoKiga8iSJ7VNCYSBTC7syQYDxEQSQhyfRs
-        WDyJBxWjG0XxQ/xfJBpjjG52fdWpGSeb/cxujA+K6aqurqqurv6MUixUy1mjmaIB9EQ1xXd8f4D6NUs0
-        qUbPWlabBlzumquZ9lU4GwM9hfPzuiFqddPZj/Y5DiKpWc5NtNsnkt2mGXa4wowtZWtFor19Dgz1aqbz
-        TbXEPiWdnsE9HuDkNJyM6aboygyAZZ9Ao7phH+QhwcEzHwpFnXUskkAwJ4mojdl/gN4Z2ZENmAQydhF6
-        lME4BUZZ5N7c4DVP6pZ9gEXKgitxLWSJbZDfJSqLdC3E933eAAjIHPQeIJMf8ZXZ4Z7cgBIV3AvMYBbx
-        5BwGnkGW9sgSu3TTPoV2Einuxnc8/YZzy227mcK3DvxXagcClBOUOmYV1XS2QpbWW2LLWeQBDnfDgcVO
-        +1ATg9z2AigaVHgwcIRZZV60dzH4n+zgLRGMd4KvZhUJWjLIhpktHZkBELDVNqE2Ot0AZDCmGClrdRax
-        ikLVTmOZLR0wnNAs+xKzblG2V0TsJSyCs+4VkKVVQ2xhkYKtdwHBPWLWg2rGNmMC15gtDBimInzpFmFV
-        q62C7yeHGZRQmjtCchB0wT8HNUreBwR5HcG9ocIlYnFuaFF7NQxhGzqHWCSDCBl2DeRyG1KbZNyNjIha
-        yFNaxFnJIgnIquE0ia8MGrXzirvyA4OaMGC4PNqznkUSVNmZ1R1qsWtwwIzoVJg8SzquMT4C+g267WYz
-        OOgoNkSMgpCZyGYgHJ5JhUfOoZe5PKOgPqz98aKdl0ed7Rj8zjNmiRSlDu0GFOdRBHZMHrGoExAdsw10
-        cfHwqQMGsdVwolE6sd5wdg8prUf7MWgIhPoQr/Ft1MzYKh42AdmWKjBgWB613L5BJDsY/v5cgE6wcz8b
-        /A7IOZHsYPj7c4GcEzGbB+H4bEoVlBOgX9L4ZKJ1fqhbPRtpiJT9kwDIuel0QBGOnWa5l2F4Mtl7+Jb7
-        UtHWOX/KAXBF8+xsXKfOBu7KiUorXvl3DG5G09nBXVkBndwBeDMzxQDO+cJnNPYx7v7D0E8h4BPSeYFt
-        lzcAFzDWRhcFs+OB+WaZQSlcNGFWLQjoByxCH+Qzi4PAjOu9TFnOznJLLGO1QCgpABcUADlmtiT81wCg
-        L88Kl1gWpAbEEHZEHbMeIJ/eANxOXCr4cbDvZ/50oG96l4B+DlghDkdj8gWM65e7iw5A6vuIZYWXgDD+
-        kJQv3s++X6ziAoCun6QsaAAEemxC+Sw9HHngoHcdl0CqYe+FjQGZ2VLAbz96ek9IbRGEP2ZxR43Eqtik
-        D4ryB2PWXI08wqGAAAAAAElFTkSuQmCC
-</value>
-  </data>
+  <metadata name="MovimientoSeleccionadoBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>

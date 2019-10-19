@@ -2,14 +2,16 @@
 using MonicaExtra.View;
 using System;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace MonicaExtra.Conrtroller
 {
-    class ControlCajaChicaModuloController
+    class ControlCajaChicaModuloController : ControllersBase
     {
         #region VARIABLES
         private readonly ControlCajaChicaModulo _view;
         private readonly monicaextraEntities _dbContext;
+        private readonly MenuModulo _ventanaAnterior;
 
         //  VARIABLES PARA EL PAGINATOR DE LA TABLA QUEMUESTRA TODOS LOS MOVIMIENTOS
         private int paginaActiual = 0;
@@ -17,15 +19,17 @@ namespace MonicaExtra.Conrtroller
         private int totalPaginas = 0;
         #endregion
 
-        public ControlCajaChicaModuloController(ControlCajaChicaModulo view)
+        public ControlCajaChicaModuloController(ControlCajaChicaModulo view, MenuModulo VentanaAnterior)
         {
             _view = view;
             _dbContext = new monicaextraEntities();
+            _ventanaAnterior = VentanaAnterior;
 
             LlenarComponentesConDB();
             AplicarEventosAVista();
-        }
 
+            VentanaAnterior.Hide();
+        }
 
         /// <summary>
         /// Llenar los componentes con los datos correspondientes, con data desde la base de datos y demas.
@@ -51,8 +55,12 @@ namespace MonicaExtra.Conrtroller
             #region BUTTONS
             _view.btnMovimientos.Click += new EventHandler((object sender, EventArgs e) =>
             {
-                new CajaModulo().Show();
-                _view.Hide();
+                new CajaModulo(_view).Show();
+            });
+
+            _view.btnAtras.Click += new EventHandler((object sender, EventArgs e) => {
+                _ventanaAnterior.Show();
+                _view.Dispose();
             });
 
             #region BOTONES PARA EL PAGINATOR
@@ -78,9 +86,11 @@ namespace MonicaExtra.Conrtroller
             {
                 paginaActiual = totalPaginas - 1;
                 LlenarTabla();
-            }); 
+            });
             #endregion
             #endregion
+
+            _view.FormClosing += new FormClosingEventHandler((object sender, FormClosingEventArgs e) => { Dispose(); });
         }
 
         /// <summary>

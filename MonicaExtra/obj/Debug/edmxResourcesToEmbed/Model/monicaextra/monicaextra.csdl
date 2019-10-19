@@ -18,7 +18,7 @@
     </Key>
     <Property Name="NumeroTransacion" Type="Int16" Nullable="false" />
     <Property Name="Descripcion" Type="String" MaxLength="54" FixedLength="false" Unicode="false" />
-    <Property Name="Tipo" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+    <Property Name="Tipo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="clasificacionmovicaja">
     <Key>
@@ -61,5 +61,19 @@
     <EntitySet Name="clasificacionfiscals" EntityType="Self.clasificacionfiscal" />
     <EntitySet Name="clasificacionmovicajas" EntityType="Self.clasificacionmovicaja" />
     <EntitySet Name="movimientocajas" EntityType="Self.movimientocaja" />
+    <EntitySet Name="usuarios" EntityType="monica10Model.usuario" />
   </EntityContainer>
+  <EntityType Name="usuario">
+    <Key>
+      <PropertyRef Name="id_usuario" />
+    </Key>
+    <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="usuario1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="clave" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="categoria" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="activo" Type="Boolean" />
+    <Property Name="nombre_completo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="animal" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="plato" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
 </Schema>

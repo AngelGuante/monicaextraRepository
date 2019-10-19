@@ -5,11 +5,11 @@ namespace MonicaExtra.View
 {
     public partial class CajaModulo : Form
     {
-        public CajaModulo()
+        public CajaModulo(ControlCajaChicaModulo ventanaAnterior)
         {
             InitializeComponent();
             CenterToScreen();
-            new CajaModuloController(this);
+            new CajaModuloController(this, ventanaAnterior);
         }
     }
 }

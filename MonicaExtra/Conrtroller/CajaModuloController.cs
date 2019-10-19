@@ -8,32 +8,31 @@ using System.Windows.Forms;
 
 namespace MonicaExtra.Conrtroller
 {
-    class CajaModuloController
+    class CajaModuloController : ControllersBase
     {
         #region VARIABLES
         private readonly CajaModulo _view;
         private readonly monicaextraEntities _dbContext;
 
         private readonly List<clasificacionmovicaja> _clasificacionMovimientoCaja;
-        private readonly List<string> _clasificacionBeneficiario;
         private readonly List<string> _clasificacionRNC;
         private readonly List<clasificacionfiscal> _clasificacionFiscal;
         private readonly List<string> _clasificacionNroCaja;
+        private readonly List<usuario> _usuarios;
 
+        private readonly ControlCajaChicaModulo _ventanaAnterior;
         //  Almacenara el objeto seleccionado en el DataGridView, para cuando se le vaya a hacer una modificacion.
         private movimientocaja objMovimientoSeleccionado = null;
         #endregion
 
-        public CajaModuloController(CajaModulo view)
+        public CajaModuloController(CajaModulo view, ControlCajaChicaModulo VentanaAnterior)
         {
+            _ventanaAnterior = VentanaAnterior;
             _view = view;
             _dbContext = new monicaextraEntities();
 
             _clasificacionMovimientoCaja = _dbContext.clasificacionmovicajas.OrderBy(o => new { o.Tipo, o.Descripcion })
                                                                             .ToList();
-            _clasificacionBeneficiario = _dbContext.movimientocajas.Select(s => s.Beneficiario)
-                                                                    .Distinct()
-                                                                    .ToList();
             _clasificacionRNC = _dbContext.movimientocajas.Where(w => w.Rnc != null && w.Rnc != "")
                                                           .Select(s => s.Rnc)
                                                           .Distinct()
@@ -44,9 +43,13 @@ namespace MonicaExtra.Conrtroller
                                                               .ToList();
             _clasificacionFiscal = _dbContext.clasificacionfiscals.OrderBy(o => o.Descripcion)
                                                                   .ToList();
+            _usuarios = _dbContext.usuarios
+                                  .ToList();
 
             LlenarComponentesConDB(true);
             AplicarEventosAVista();
+
+            _ventanaAnterior.Hide();
         }
 
         /// <summary>
@@ -56,10 +59,16 @@ namespace MonicaExtra.Conrtroller
         {
             if (LlenarComboBoxes)
             {
-                _view.cmbbCargadoA.DataSource = new List<string> {
-                    "0",
-                    "5555555"
-                };
+                //  ComboBox para el filtro usuarios
+                Dictionary<short, string> usuariosCmbb = new Dictionary<short, string>();
+                _usuarios.Where(U => U.activo == true).ToList()
+                                                      .ForEach(f =>
+                                                      {
+                                                          usuariosCmbb.Add((short)f.id_usuario, string.Concat("(", f.usuario1, ")\t - ", f.nombre_completo));
+                                                      });
+                _view.cmbbCargadoA.DataSource = new BindingSource(usuariosCmbb, null);
+                _view.cmbbCargadoA.DisplayMember = "Value";
+                _view.cmbbCargadoA.ValueMember = "Key";
 
                 //  ComboBox para el filtro de tipo de movimiento
                 Dictionary<short, string> tipoMovimientoCmbb = new Dictionary<short, string>();
@@ -219,7 +228,7 @@ namespace MonicaExtra.Conrtroller
                 string tipoMovimientoSeleccionado = "";
                 StringBuilder _query = new StringBuilder();
                 _query.Append("SELECT * " +
-                              "FROM movimientocaja " +
+                              "FROM [monicaextra].[movimientocaja] " +
                              $"WHERE Fecha >= '{fechaDesde}' AND Fecha <= '{fechaHasta}' ");
 
                 switch (filtroSeleccionado)
@@ -259,10 +268,41 @@ namespace MonicaExtra.Conrtroller
                 _query.Append("ORDER BY NumeroTransacion DESC ");
 
                 using (var _dbontext2 = new monicaextraEntities())
+                    _view.dataGridView1.DataSource = _dbontext2.Database.SqlQuery<movimientocaja>(_query.ToString()).Select(s => new { s.NumeroTransacion, s.Beneficiario, s.Concepto, s.Monto, s.Fecha }).ToList();
+            });
+
+            _view.btnAtras.Click += new EventHandler((object sender, EventArgs e) =>
+            {
+                _ventanaAnterior.Show();
+                _view.Dispose();
+            });
+
+            _view.btnMovimientoAImprimir.Click += new EventHandler((object sender, EventArgs e) =>
+            {
+                var ObjMovimiento = new Model.Reportes.MovimientoSeleccionado
                 {
-                    var dsd = _dbontext2.Database.SqlQuery<movimientocaja>(_query.ToString());
-                    _view.dataGridView1.DataSource = dsd.Select(s => new { s.NumeroTransacion, s.Beneficiario, s.Concepto, s.Monto, s.Fecha }).ToList();
-                }
+                    NroTransaccion = objMovimientoSeleccionado.NumeroTransacion.ToString(),
+                    Beneficiario = objMovimientoSeleccionado.Beneficiario,
+                    Concepto = objMovimientoSeleccionado.Concepto,
+                    Monto = objMovimientoSeleccionado.Monto.ToString(),
+                    Fecha = objMovimientoSeleccionado.Fecha
+                };
+
+                List<Model.Reportes.MovimientoSeleccionado> movimiento = new List<Model.Reportes.MovimientoSeleccionado>
+                {
+                  ObjMovimiento
+                };
+
+                if (_view.chbDatosFiscales.Checked)
+                {
+                    ObjMovimiento.RNC = objMovimientoSeleccionado.Rnc;
+                    ObjMovimiento.NCF = objMovimientoSeleccionado.Ncf;
+                    ObjMovimiento.ClsfFiscal = objMovimientoSeleccionado.Clasificancf.ToString();
+                    ObjMovimiento.VSinItbis = objMovimientoSeleccionado.Neto.ToString();
+                    ObjMovimiento.ITBISFacturado = objMovimientoSeleccionado.Itebis;
+                };
+
+                new MovimientoSeleccionado(movimiento).Show();
             });
             #endregion
 
@@ -302,9 +342,9 @@ namespace MonicaExtra.Conrtroller
                     dictionaryCmbb.Add("S", "Salidas");
                 }
                 else if (_view.cmbbFiltroMovimientos.SelectedValue.ToString() == "4")
-                    _clasificacionBeneficiario.ForEach(f =>
+                    _usuarios.ForEach(f =>
                     {
-                        dictionaryCmbb.Add(f, f);
+                        dictionaryCmbb.Add(f.id_usuario.ToString(), f.nombre_completo);
                     });
                 else if (_view.cmbbFiltroMovimientos.SelectedValue.ToString() == "5")
                     _clasificacionRNC.ForEach(f =>
@@ -344,7 +384,7 @@ namespace MonicaExtra.Conrtroller
 
                 //  Datos Basicos
                 _view.dtpEmicion.Value = new DateTime(Convert.ToDateTime(objMovimientoSeleccionado.Fecha).Year, Convert.ToDateTime(objMovimientoSeleccionado.Fecha).Month, Convert.ToDateTime(objMovimientoSeleccionado.Fecha).Day);
-                _view.cmbbCargadoA.SelectedIndex = 0;  /*ARREGLAR*/
+                _view.cmbbCargadoA.SelectedValue = Convert.ToInt16(objMovimientoSeleccionado.Beneficiario);
                 _view.txtbMonto.Text = objMovimientoSeleccionado.Monto.ToString();
                 _view.cmbbTipoMovimiento.SelectedValue = objMovimientoSeleccionado.TipoMovimiento.Value;
                 _view.txtbConcepto.Text = objMovimientoSeleccionado.Concepto.ToString();
@@ -374,6 +414,8 @@ namespace MonicaExtra.Conrtroller
                 _view.btnGuardar.Enabled = false;
             });
             #endregion
+
+            _view.FormClosing += new FormClosingEventHandler((object sender, FormClosingEventArgs e) => { Dispose(); });
         }
 
         /// <summary>

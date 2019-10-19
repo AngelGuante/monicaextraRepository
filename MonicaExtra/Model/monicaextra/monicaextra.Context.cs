@@ -29,5 +29,6 @@ namespace MonicaExtra.Model.monicaextra
         public virtual DbSet<clasificacionfiscal> clasificacionfiscals { get; set; }
         public virtual DbSet<clasificacionmovicaja> clasificacionmovicajas { get; set; }
         public virtual DbSet<movimientocaja> movimientocajas { get; set; }
+        public virtual DbSet<usuario> usuarios { get; set; }
     }
 }

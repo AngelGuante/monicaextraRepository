@@ -1,9 +1,10 @@
 ﻿using MonicaExtra.View;
 using System;
+using System.Windows.Forms;
 
 namespace MonicaExtra.Conrtroller
 {
-    class MenuModuloController
+    class MenuModuloController : ControllersBase
     {
         #region VARIABLES
         private MenuModulo _view;
@@ -23,10 +24,11 @@ namespace MonicaExtra.Conrtroller
         {
             #region Buttons
             _view.btnMenuControlCajaChica.Click += new EventHandler((object sender, EventArgs e) => {
-                new ControlCajaChicaModulo().Show();
-                _view.Hide();
+                new ControlCajaChicaModulo(_view).Show();
             });
             #endregion
+
+            _view.FormClosing += new FormClosingEventHandler((object sender, FormClosingEventArgs e) => { Dispose(); });
         }
     }
 }

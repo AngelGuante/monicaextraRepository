@@ -76,8 +76,10 @@
   <ItemGroup>
     <Compile Include="Conrtroller\CajaModuloController.cs" />
     <Compile Include="Conrtroller\ControlCajaChicaModuloController.cs" />
+    <Compile Include="Conrtroller\ControllersBase.cs" />
     <Compile Include="Conrtroller\CuadreModuloController.cs" />
     <Compile Include="Conrtroller\MenuModuloController.cs" />
+    <Compile Include="Conrtroller\MovimientoSeleccionadoController.cs" />
     <Compile Include="Conrtroller\SeleccionEmpresaModuloController.cs" />
     <Compile Include="Model\monicaextra\cierrecaja.cs">
       <DependentUpon>monicaextra.tt</DependentUpon>
@@ -106,6 +108,10 @@
     <Compile Include="Model\monicaextra\movimientocaja.cs">
       <DependentUpon>monicaextra.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\monicaextra\usuario.cs">
+      <DependentUpon>monicaextra.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Reportes\MovimientoSeleccionado.cs" />
     <Compile Include="Utils\GlobalVariables.cs" />
     <Compile Include="Model\monica_global\empresa.cs">
       <DependentUpon>monica_global.tt</DependentUpon>
@@ -124,11 +130,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>monica_global.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Reportes\monicaextraDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>monicaextraDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -157,6 +158,12 @@
     <Compile Include="View\MenuModulo.Designer.cs">
       <DependentUpon>MenuModulo.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\MovimientoSeleccionado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MovimientoSeleccionado.Designer.cs">
+      <DependentUpon>MovimientoSeleccionado.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\SeleccionEmpresaModulo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -173,6 +180,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Utils\Reports\CierreCajaReport.rdlc" />
+    <EmbeddedResource Include="Utils\Reports\MovimientoSeleccionadoReport.rdlc" />
     <EmbeddedResource Include="View\CajaModulo.resx">
       <DependentUpon>CajaModulo.cs</DependentUpon>
     </EmbeddedResource>
@@ -184,6 +192,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\MenuModulo.resx">
       <DependentUpon>MenuModulo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MovimientoSeleccionado.resx">
+      <DependentUpon>MovimientoSeleccionado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\SeleccionEmpresaModulo.resx">
       <DependentUpon>SeleccionEmpresaModulo.cs</DependentUpon>
@@ -201,17 +212,6 @@
     </None>
     <None Include="Model\monica_global\monica_global.edmx.diagram">
       <DependentUpon>monica_global.edmx</DependentUpon>
-    </None>
-    <None Include="Model\Reportes\monicaextraDataSet.xsc">
-      <DependentUpon>monicaextraDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="Model\Reportes\monicaextraDataSet.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>monicaextraDataSet.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Model\Reportes\monicaextraDataSet.xss">
-      <DependentUpon>monicaextraDataSet.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
