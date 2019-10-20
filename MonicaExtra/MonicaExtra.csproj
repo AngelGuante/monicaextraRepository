@@ -214,7 +214,8 @@
     <None Include="Model\monica_global\monica_global.edmx.diagram">
       <DependentUpon>monica_global.edmx</DependentUpon>
     </None>
-    <None Include="Model\Reportes\MonicaExtra.Model.Reportes.MovimientoSeleccionado.datasource" />
+    <None Include="Model\Reportes\DataSource\MonicaExtra.Model.Reportes.MovimientoSeleccionado.datasource" />
+    <None Include="Model\Reportes\DataSource\MonicaExtra.Model.Reportes.CierreCaja.datasource" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

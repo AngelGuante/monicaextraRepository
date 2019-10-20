@@ -408,6 +408,7 @@ namespace MonicaExtra.Conrtroller
                     _view.chbDatosFiscales.Checked = false;
                 }
 
+                _view.btnMovimientoAImprimir.Enabled = true;
                 _view.btnLimpiarCampos.Enabled = true;
                 _view.btnModificar.Enabled = true;
                 _view.btnGuardar.Enabled = false;
@@ -471,6 +472,7 @@ namespace MonicaExtra.Conrtroller
                 _view.chbDatosFiscales.Checked = false;
             }
 
+            _view.btnMovimientoAImprimir.Enabled = false;
             _view.btnModificar.Enabled = false;
             _view.btnGuardar.Enabled = false;
             _view.btnLimpiarCampos.Enabled = false;

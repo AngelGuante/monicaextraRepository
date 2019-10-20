@@ -251,6 +251,7 @@
             // 
             this.txtbNCF.Enabled = false;
             this.txtbNCF.Location = new System.Drawing.Point(150, 82);
+            this.txtbNCF.MaxLength = 1;
             this.txtbNCF.Name = "txtbNCF";
             this.txtbNCF.Size = new System.Drawing.Size(347, 20);
             this.txtbNCF.TabIndex = 6;
@@ -556,7 +557,7 @@
             this.btnHacerCuadre.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHacerCuadre.Image = ((System.Drawing.Image)(resources.GetObject("btnHacerCuadre.Image")));
             this.btnHacerCuadre.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnHacerCuadre.Location = new System.Drawing.Point(673, 0);
+            this.btnHacerCuadre.Location = new System.Drawing.Point(648, 0);
             this.btnHacerCuadre.Name = "btnHacerCuadre";
             this.btnHacerCuadre.Size = new System.Drawing.Size(164, 46);
             this.btnHacerCuadre.TabIndex = 1;
@@ -567,14 +568,15 @@
             // btnMovimientoAImprimir
             // 
             this.btnMovimientoAImprimir.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnMovimientoAImprimir.Enabled = false;
             this.btnMovimientoAImprimir.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMovimientoAImprimir.Image = ((System.Drawing.Image)(resources.GetObject("btnMovimientoAImprimir.Image")));
             this.btnMovimientoAImprimir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMovimientoAImprimir.Location = new System.Drawing.Point(837, 0);
+            this.btnMovimientoAImprimir.Location = new System.Drawing.Point(812, 0);
             this.btnMovimientoAImprimir.Name = "btnMovimientoAImprimir";
-            this.btnMovimientoAImprimir.Size = new System.Drawing.Size(191, 46);
+            this.btnMovimientoAImprimir.Size = new System.Drawing.Size(216, 46);
             this.btnMovimientoAImprimir.TabIndex = 0;
-            this.btnMovimientoAImprimir.Text = "Imprimir Reporte";
+            this.btnMovimientoAImprimir.Text = "Imprimir Movimiento";
             this.btnMovimientoAImprimir.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnMovimientoAImprimir.UseVisualStyleBackColor = true;
             // 
