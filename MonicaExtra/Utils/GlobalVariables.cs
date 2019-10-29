@@ -4,12 +4,12 @@ namespace MonicaExtra.Utils
 {
     public static class GlobalVariables
     {
-        public static empresa _empresaSeleccionada { get; set; }
+        public static EmpresaModel _empresaSeleccionada { get; set; }
 
         /// <summary>
         /// Asigna las propiedades de la empresa a un objeto pasado por parametro, para fines de los reportes.
         /// </summary>
-        public static void SetEmpresaValues(empresa ObjEmpresa)
+        public static void SetEmpresaValues(EmpresaModel ObjEmpresa)
         {
             ObjEmpresa.Nombre_empresa = _empresaSeleccionada.Nombre_empresa;
             ObjEmpresa.direccion1 = _empresaSeleccionada.direccion1;

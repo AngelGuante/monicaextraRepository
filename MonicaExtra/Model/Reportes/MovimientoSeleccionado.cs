@@ -2,7 +2,7 @@
 
 namespace MonicaExtra.Model.Reportes
 {
-    public class MovimientoSeleccionado : empresa
+    public class MovimientoSeleccionado : EmpresaModel
     {
         public string NroTransaccion { get; set; }
         public string Beneficiario { get; set; }

@@ -108,11 +108,14 @@
     <Compile Include="Model\monicaextra\movimientocaja.cs">
       <DependentUpon>monicaextra.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\monicaextra\MovimientoCajaModel.cs" />
     <Compile Include="Model\monicaextra\usuario.cs">
       <DependentUpon>monicaextra.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\monica_global\EmpresaModel.cs" />
     <Compile Include="Model\Reportes\CierreCaja.cs" />
     <Compile Include="Model\Reportes\MovimientoSeleccionado.cs" />
+    <Compile Include="Utils\DB\Connection.cs" />
     <Compile Include="Utils\GlobalVariables.cs" />
     <Compile Include="Model\monica_global\empresa.cs">
       <DependentUpon>monica_global.tt</DependentUpon>

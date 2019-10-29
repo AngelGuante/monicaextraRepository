@@ -1,6 +1,8 @@
 ﻿using MonicaExtra.Model.monica_global;
 using MonicaExtra.Utils;
+using MonicaExtra.Utils.DB;
 using MonicaExtra.View;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -10,13 +12,14 @@ namespace MonicaExtra.Conrtroller
     {
         #region VARIABLES
         private readonly SeleccionEmpresaModulo _view;
-        private readonly monica10_globalEntities _dbContext;
+        private Connection _conn;
+        private List<EmpresaModel> _empresas;
         #endregion
 
         public SeleccionEmpresaModuloController(SeleccionEmpresaModulo view)
         {
             _view = view;
-            _dbContext = new monica10_globalEntities();
+            _conn = new Connection();
 
             LlenarComponentesConDB();
             AplicarEventosAVista();
@@ -27,9 +30,10 @@ namespace MonicaExtra.Conrtroller
         /// </summary>
         private void LlenarComponentesConDB()
         {
+            _empresas = (List<EmpresaModel>)_conn.ExecuteQuery(new System.Text.StringBuilder("SELECT empresa_id, Nombre_empresa FROM empresas"), "monica10_global", "empresa");
             #region DataGridViews
-            var empresas = _dbContext.empresas.Select(s => new { ID = s.empresa_id, Empresa = s.Nombre_empresa.Trim().ToUpper() })
-                                      .ToList();
+            var empresas = _empresas.Select(s => new { ID = s.empresa_id, Empresa = s.Nombre_empresa.Trim().ToUpper() })
+                                    .ToList();
             _view.dgvSelectEmpresa.DataSource = empresas;
             #endregion
         }
@@ -44,7 +48,7 @@ namespace MonicaExtra.Conrtroller
             {
                 if (e.RowIndex < 0) return;
                 var idEmpresa = (int)_view.dgvSelectEmpresa.Rows[e.RowIndex].Cells[0].Value;
-                GlobalVariables._empresaSeleccionada = _dbContext.empresas.FirstOrDefault(f => f.empresa_id == idEmpresa);
+                GlobalVariables._empresaSeleccionada = _empresas.FirstOrDefault(f => f.empresa_id == idEmpresa);
                 new MenuModulo().Show();
                 _view.Hide();
             });
