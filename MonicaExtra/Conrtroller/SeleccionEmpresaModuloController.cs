@@ -31,6 +31,7 @@ namespace MonicaExtra.Conrtroller
         private void LlenarComponentesConDB()
         {
             _empresas = (List<EmpresaModel>)_conn.ExecuteQuery(new System.Text.StringBuilder("SELECT empresa_id, Nombre_empresa FROM empresas"), "monica10_global", "empresa");
+
             #region DataGridViews
             var empresas = _empresas.Select(s => new { ID = s.empresa_id, Empresa = s.Nombre_empresa.Trim().ToUpper() })
                                     .ToList();

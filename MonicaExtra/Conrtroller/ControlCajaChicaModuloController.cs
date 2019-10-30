@@ -59,7 +59,7 @@ namespace MonicaExtra.Conrtroller
         /// Llena la tabla que muestra todos los movimientos. Lo coloco en un metodo aparte porque se va a llamar desde diferentes lugares dentro de la vista.
         /// </summary>
         private void LlenarTabla() =>
-            _view.dataGridView1.DataSource = ((List<MovimientoCajaModel>)_conn.ExecuteQuery(new System.Text.StringBuilder("SELECT TOP 50 * FROM monicaextra.movimientocaja WHERE Estatus = 1 ORDER BY NumeroTransacion DESC"), "monica10", "movimientocaja"))
+            _view.dataGridView1.DataSource = ((List<MovimientoCajaModel>)_conn.ExecuteQuery(new System.Text.StringBuilder("SELECT TOP 50 NumeroTransacion, Beneficiario, Concepto, Rnc, Ncf, Monto, Fecha  FROM monicaextra.movimientocaja WHERE Estatus = 1 ORDER BY NumeroTransacion DESC"), "monica10", "movimientocaja"))
                                                                                             .Select(s => new { s.NumeroTransacion, s.Beneficiario, s.Concepto, s.Monto, s.Fecha })
                                                                                             .ToList();
     }

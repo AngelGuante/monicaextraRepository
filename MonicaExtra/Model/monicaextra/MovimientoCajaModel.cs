@@ -2,7 +2,7 @@
 
 namespace MonicaExtra.Model.monicaextra
 {
-    class MovimientoCajaModel
+    public class MovimientoCajaModel
     {
         public short NumeroTransacion { get; set; }
         public string Beneficiario { get; set; }

@@ -87,9 +87,11 @@
     <Compile Include="Model\monicaextra\clasificacionfiscal.cs">
       <DependentUpon>monicaextra.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\monicaextra\ClasificacionFiscalModel.cs" />
     <Compile Include="Model\monicaextra\clasificacionmovicaja.cs">
       <DependentUpon>monicaextra.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\monicaextra\ClasificacionmovicajaModel.cs" />
     <Compile Include="Model\monicaextra\monicaextra.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -112,6 +114,7 @@
     <Compile Include="Model\monicaextra\usuario.cs">
       <DependentUpon>monicaextra.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\monicaextra\UsuarioModel.cs" />
     <Compile Include="Model\monica_global\EmpresaModel.cs" />
     <Compile Include="Model\Reportes\CierreCaja.cs" />
     <Compile Include="Model\Reportes\MovimientoSeleccionado.cs" />

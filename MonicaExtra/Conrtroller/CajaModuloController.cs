@@ -1,4 +1,6 @@
-﻿using MonicaExtra.Model.monicaextra;
+﻿using MonicaExtra.Model.monica_global;
+using MonicaExtra.Model.monicaextra;
+using MonicaExtra.Utils.DB;
 using MonicaExtra.View;
 using System;
 using System.Collections.Generic;
@@ -12,13 +14,14 @@ namespace MonicaExtra.Conrtroller
     {
         #region VARIABLES
         private readonly CajaModulo _view;
-        private readonly monicaextraEntities _dbContext;
 
-        private readonly List<clasificacionmovicaja> _clasificacionMovimientoCaja;
+        private readonly List<ClasificacionmovicajaModel> _clasificacionMovimientoCaja;
         private readonly List<string> _clasificacionRNC;
-        private readonly List<clasificacionfiscal> _clasificacionFiscal;
+        private readonly List<ClasificacionFiscalModel> _clasificacionFiscal;
         private readonly List<string> _clasificacionNroCaja;
-        private readonly List<usuario> _usuarios;
+        private readonly List<UsuarioModel> _usuarios;
+
+        private readonly Connection _conn;
 
         private readonly ControlCajaChicaModulo _ventanaAnterior;
         //  Almacenara el objeto seleccionado en el DataGridView, para cuando se le vaya a hacer una modificacion.
@@ -29,22 +32,21 @@ namespace MonicaExtra.Conrtroller
         {
             _ventanaAnterior = VentanaAnterior;
             _view = view;
-            _dbContext = new monicaextraEntities();
+            _conn = new Connection();
 
-            _clasificacionMovimientoCaja = _dbContext.clasificacionmovicajas.OrderBy(o => new { o.Tipo, o.Descripcion })
-                                                                            .ToList();
-            _clasificacionRNC = _dbContext.movimientocajas.Where(w => w.Rnc != null && w.Rnc != "")
-                                                          .Select(s => s.Rnc)
-                                                          .Distinct()
-                                                          .ToList();
-            _clasificacionNroCaja = _dbContext.movimientocajas.Where(w => w.NumeroCaja != null && w.NumeroCaja.Value.ToString() != "")
-                                                              .Select(s => s.NumeroCaja.Value.ToString())
-                                                              .Distinct()
-                                                              .ToList();
-            _clasificacionFiscal = _dbContext.clasificacionfiscals.OrderBy(o => o.Descripcion)
+            _clasificacionMovimientoCaja = ((List<ClasificacionmovicajaModel>)new Connection().ExecuteQuery(new StringBuilder("SELECT * FROM monicaextra.clasificacionmovicaja ORDER BY Tipo, Descripcion"), "monica10", "clasificacionmovicaja"))
+                                                                                    .ToList();
+            _clasificacionRNC = ((List<MovimientoCajaModel>)new Connection().ExecuteQuery(new StringBuilder("SELECT DISTINCT Rnc, NumeroTransacion FROM monicaextra.movimientocaja WHERE Rnc != '' AND RNC IS NOT NULL"), "monica10", "movimientocaja"))
+                                                                  .Select(s => s.Rnc)
                                                                   .ToList();
-            _usuarios = _dbContext.usuarios
-                                  .ToList();
+            _clasificacionNroCaja = ((List<MovimientoCajaModel>)new Connection().ExecuteQuery(new StringBuilder("SELECT DISTINCT NumeroCaja FROM monicaextra.movimientocaja WHERE NumeroCaja IS NOT NULL AND NumeroCaja != ''"), "monica10", "movimientocaja"))
+                                                                      .Select(s => s.NumeroCaja.Value.ToString())
+                                                                      .Distinct()
+                                                                      .ToList();
+            _clasificacionFiscal = ((List<ClasificacionFiscalModel>)new Connection().ExecuteQuery(new StringBuilder("SELECT * FROM monicaextra.clasificacionfiscal ORDER BY Descripcion"), "monica10", "clasificacionfiscal"))
+                                                                          .ToList();
+            _usuarios = ((List<UsuarioModel>)new Connection().ExecuteQuery(new StringBuilder("SELECT * FROM dbo.usuarios"), "monica10", "usuarios"))
+                                                              .ToList();
 
             LlenarComponentesConDB(true);
             AplicarEventosAVista();
@@ -64,7 +66,7 @@ namespace MonicaExtra.Conrtroller
                 _usuarios.Where(U => U.activo == true).ToList()
                                                       .ForEach(f =>
                                                       {
-                                                          usuariosCmbb.Add((short)f.id_usuario, string.Concat("(", f.usuario1, ")\t - ", f.nombre_completo));
+                                                          usuariosCmbb.Add((short)f.id_usuario, string.Concat("(", f.usuario, ")\t - ", f.nombre_completo));
                                                       });
                 _view.cmbbCargadoA.DataSource = new BindingSource(usuariosCmbb, null);
                 _view.cmbbCargadoA.DisplayMember = "Value";
@@ -106,11 +108,10 @@ namespace MonicaExtra.Conrtroller
                 _view.cmbbFiltroMovimientos.DataSource = new BindingSource(filtroCmbb, null);
             }
 
-            _view.dataGridView1.DataSource = _dbContext.movimientocajas.Where(e => e.NumeroCierre == (_dbContext.cierrecajas.Max(m => m.NumeroCierre) + 1) &&
-                                                                                   e.Estatus == 1)
-                                                                       .Select(s => new { s.NumeroTransacion, s.Beneficiario, s.Concepto, s.Monto, s.Fecha })
-                                                                       .OrderByDescending(o => o.NumeroTransacion)
-                                                                       .ToList();
+            _view.dataGridView1.DataSource = ((List<MovimientoCajaModel>)_conn.ExecuteQuery(new StringBuilder("SELECT * FROM monicaextra.movimientocaja WHERE Estatus = 1 AND NumeroCierre = (SELECT MAX(NumeroCierre) FROM monicaextra.movimientocaja)"), "monica10", "movimientocaja"))
+                                                                               .Select(s => new { s.NumeroTransacion, s.Beneficiario, s.Concepto, s.Monto, s.Fecha })
+                                                                               .OrderByDescending(o => o.NumeroTransacion)
+                                                                               .ToList();
         }
 
         /// <summary>
