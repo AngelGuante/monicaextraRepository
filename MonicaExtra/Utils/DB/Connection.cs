@@ -3,7 +3,6 @@ using MonicaExtra.Model.monicaextra;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -13,7 +12,6 @@ namespace MonicaExtra.Utils.DB
     {
         private SqlConnection _monica10Conn { get; set; } = new SqlConnection("Server=MIKI\\MONICA10;Database=monica10;Trusted_Connection=True;");
         private SqlConnection _monica10_GlovalConn { get; set; } = new SqlConnection("Server=MIKI\\MONICA10;Database=monica10_global;Trusted_Connection=True;");
-
 
         private SqlConnection GetConnection(string db)
         {
@@ -150,6 +148,74 @@ namespace MonicaExtra.Utils.DB
                 MessageBox.Show(e.Message);
             }
             return null;
+        }
+
+        public int ExecuteScalar(StringBuilder query, string db, string table)
+        {
+            try
+            {
+                SqlConnection conn = GetConnection(db);
+                int cantidad;
+                using (var cmmnd = new SqlCommand(query.ToString(), conn))
+                {
+                    cmmnd.Connection.Open();
+                    switch (table)
+                    {
+                        case "movimientocaja":
+                            cantidad = (int)cmmnd.ExecuteScalar();
+                            cmmnd.Connection.Dispose();
+                            return cantidad;
+                        case "cierrecaja":
+                            cantidad = (int)cmmnd.ExecuteScalar();
+                            cmmnd.Connection.Dispose();
+                            return cantidad;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            return -1;
+        }
+
+        public void InsertValues(StringBuilder query, string db, string table, MovimientoCajaModel movimiento)
+        {
+            try
+            {
+                SqlConnection conn = GetConnection(db);
+                using (var cmmnd = new SqlCommand(query.ToString(), conn))
+                {
+                    cmmnd.Parameters.Add(new SqlParameter("NumeroTransacion", movimiento.NumeroTransacion));
+                    cmmnd.Parameters.Add(new SqlParameter("Fecha", movimiento.Fecha));
+                    cmmnd.Parameters.Add(new SqlParameter("Beneficiario", movimiento.Beneficiario));
+                    cmmnd.Parameters.Add(new SqlParameter("Monto", movimiento.Monto));
+                    cmmnd.Parameters.Add(new SqlParameter("TipoMovimiento", movimiento.TipoMovimiento));
+                    cmmnd.Parameters.Add(new SqlParameter("Concepto", movimiento.Concepto));
+                    cmmnd.Parameters.Add(new SqlParameter("EntradaSalida", movimiento.EntradaSalida));
+                    cmmnd.Parameters.Add(new SqlParameter("NumeroCierre", movimiento.NumeroCierre));
+                    cmmnd.Parameters.Add(new SqlParameter("TipoMoneda", movimiento.TipoMoneda));
+                    cmmnd.Parameters.Add(new SqlParameter("TasaCambio", movimiento.TasaCambio));
+                    cmmnd.Parameters.Add(new SqlParameter("Estatus", movimiento.Estatus));
+                    cmmnd.Parameters.Add(new SqlParameter("Rnc", movimiento.Rnc ?? ""));
+                    cmmnd.Parameters.Add(new SqlParameter("Ncf", movimiento.Ncf ?? ""));
+                    cmmnd.Parameters.Add(new SqlParameter("Clasificancf", movimiento.Clasificancf ?? 0));
+                    cmmnd.Parameters.Add(new SqlParameter("Neto", movimiento.Neto ?? 0));
+                    cmmnd.Parameters.Add(new SqlParameter("Itebis", movimiento.Itebis ?? ""));
+                    cmmnd.Connection.Open();
+                    switch (table)
+                    {
+                        case "movimientocaja":
+                            cmmnd.ExecuteNonQuery();
+                            cmmnd.Connection.Dispose();
+                            break;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
     }
 }

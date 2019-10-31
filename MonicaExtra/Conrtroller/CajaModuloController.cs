@@ -25,7 +25,7 @@ namespace MonicaExtra.Conrtroller
 
         private readonly ControlCajaChicaModulo _ventanaAnterior;
         //  Almacenara el objeto seleccionado en el DataGridView, para cuando se le vaya a hacer una modificacion.
-        private movimientocaja objMovimientoSeleccionado = null;
+        private MovimientoCajaModel objMovimientoSeleccionado = null;
         #endregion
 
         public CajaModuloController(CajaModulo view, ControlCajaChicaModulo VentanaAnterior)
@@ -108,7 +108,7 @@ namespace MonicaExtra.Conrtroller
                 _view.cmbbFiltroMovimientos.DataSource = new BindingSource(filtroCmbb, null);
             }
 
-            _view.dataGridView1.DataSource = ((List<MovimientoCajaModel>)_conn.ExecuteQuery(new StringBuilder("SELECT * FROM monicaextra.movimientocaja WHERE Estatus = 1 AND NumeroCierre = (SELECT MAX(NumeroCierre) FROM monicaextra.movimientocaja)"), "monica10", "movimientocaja"))
+            _view.dataGridView1.DataSource = ((List<MovimientoCajaModel>)new Connection().ExecuteQuery(new StringBuilder("SELECT * FROM monicaextra.movimientocaja WHERE Estatus = 1 AND NumeroCierre = (SELECT MAX(NumeroCierre) FROM monicaextra.movimientocaja)"), "monica10", "movimientocaja"))
                                                                                .Select(s => new { s.NumeroTransacion, s.Beneficiario, s.Concepto, s.Monto, s.Fecha })
                                                                                .OrderByDescending(o => o.NumeroTransacion)
                                                                                .ToList();
@@ -137,17 +137,16 @@ namespace MonicaExtra.Conrtroller
             {
                 var EntradaSalida = (short)Convert.ToInt32(_view.cmbbTipoMovimiento.SelectedValue.ToString());
                 //  Datos Basicos
-                var movimiento = new movimientocaja
+                var movimiento = new MovimientoCajaModel
                 {
-                    NumeroTransacion = (short)(_dbContext.movimientocajas.Max(m => m.NumeroTransacion) + 1),
+                    NumeroTransacion = (short)new Connection().ExecuteScalar(new StringBuilder("SELECT CONVERT(integer, MAX(NumeroTransacion) + 1) Siguiente FROM monicaextra.movimientocaja"), "monica10", "movimientocaja"),
                     Fecha = _view.dtpEmicion.Value.ToString("yyy-MM-dd"),
                     Beneficiario = _view.cmbbCargadoA.SelectedValue.ToString(),
                     Monto = Convert.ToDecimal(_view.txtbMonto.Text),
                     TipoMovimiento = _clasificacionMovimientoCaja.FirstOrDefault(f => f.NumeroTransacion == (short)Convert.ToInt32(_view.cmbbTipoMovimiento.SelectedValue.ToString()))?.NumeroTransacion,
                     Concepto = _view.txtbConcepto.Text,
                     EntradaSalida = _clasificacionMovimientoCaja.FirstOrDefault(f => f.NumeroTransacion == EntradaSalida)?.Tipo,
-                    NumeroCierre = (short)(_dbContext.cierrecajas.Max(m => m.NumeroCierre) + 1),
-                    NumeroCaja = 1,
+                    NumeroCierre =  (short)new Connection().ExecuteScalar(new StringBuilder("SELECT CONVERT(integer, MAX(NumeroCierre)) Cierre FROM monicaextra.cierrecaja"), "monica10", "cierrecaja"),
                     TipoMoneda = "P",
                     TasaCambio = (decimal)0.0000,
                     Estatus = 1
@@ -169,9 +168,10 @@ namespace MonicaExtra.Conrtroller
                     _view.txtbITBISFactur.Enabled = false;
                 }
 
-                _dbContext.movimientocajas.Add(movimiento);
-                _dbContext.SaveChanges();
-
+                new Connection().InsertValues(new StringBuilder("INSERT INTO monicaextra.movimientocaja(NumeroTransacion, Fecha, Beneficiario, Monto, TipoMovimiento, Concepto, EntradaSalida, NumeroCierre, TipoMoneda, TasaCambio, Estatus, Rnc, Ncf, Clasificancf, Neto, Itebis) VALUES(@NumeroTransacion, @Fecha, @Beneficiario, @Monto, @TipoMovimiento, @Concepto, @EntradaSalida, @NumeroCierre, @TipoMoneda, @TasaCambio, @Estatus, @Rnc, @Ncf, @Clasificancf, @Neto, @Itebis)"),
+                                                                 "monica10",
+                                                                 "movimientocaja",
+                                                                  movimiento);
                 ResetVentana();
             });
 
@@ -182,7 +182,8 @@ namespace MonicaExtra.Conrtroller
 
             _view.btnModificar.Click += new EventHandler((object sender, EventArgs e) =>
             {
-                var mod = _dbContext.movimientocajas.FirstOrDefault(f => f.NumeroTransacion == objMovimientoSeleccionado.NumeroTransacion);
+                var mod = ((List<MovimientoCajaModel>)new Connection().ExecuteQuery(new StringBuilder($"SELECT * FROM monicaextra.movimientocaja WHERE NumeroTransacion = {objMovimientoSeleccionado.NumeroTransacion}"), "monica10", "movimientocaja"))[0];
+                //var mod = _dbContext.movimientocajas.FirstOrDefault(f => f.NumeroTransacion == objMovimientoSeleccionado.NumeroTransacion);
 
                 //  Datos Basicos
                 mod.NumeroTransacion = objMovimientoSeleccionado.NumeroTransacion;
@@ -217,7 +218,10 @@ namespace MonicaExtra.Conrtroller
                     mod.Itebis = null;
                 }
 
-                _dbContext.SaveChanges();
+                new Connection().InsertValues(new StringBuilder("UPDATE monicaextra.movimientocaja SET NumeroTransacion = @NumeroTransacion, Fecha = @Fecha, Beneficiario = @Beneficiario, Monto = @Monto, TipoMovimiento = @TipoMovimiento, Concepto = @Concepto, EntradaSalida = @EntradaSalida, NumeroCierre = @NumeroCierre, TipoMoneda = @TipoMoneda, TasaCambio = @TasaCambio, Estatus = @Estatus, Rnc = @Rnc, Ncf = @Ncf, Clasificancf = @Clasificancf, Neto = @Neto, Itebis = @Itebis"),
+                                                 "monica10",
+                                                 "movimientocaja",
+                                                  mod);
                 ResetVentana();
             });
 
@@ -228,7 +232,7 @@ namespace MonicaExtra.Conrtroller
                 var fechaHasta = _view.dtpFechaHasta.Value.ToString("yyy-MM-dd");
                 string tipoMovimientoSeleccionado = "";
                 StringBuilder _query = new StringBuilder();
-                _query.Append("SELECT * " +
+                _query.Append("SELECT NumeroTransacion, Beneficiario, Concepto, Monto, Fecha " +
                               "FROM [monicaextra].[movimientocaja] " +
                              $"WHERE Fecha >= '{fechaDesde}' AND Fecha <= '{fechaHasta}' ");
 
@@ -265,11 +269,9 @@ namespace MonicaExtra.Conrtroller
                                      $"NumeroCaja = '{tipoMovimientoSeleccionado}' ");
                         break;
                 }
-
                 _query.Append("ORDER BY NumeroTransacion DESC ");
 
-                using (var _dbontext2 = new monicaextraEntities())
-                    _view.dataGridView1.DataSource = _dbontext2.Database.SqlQuery<movimientocaja>(_query.ToString()).Select(s => new { s.NumeroTransacion, s.Beneficiario, s.Concepto, s.Monto, s.Fecha }).ToList();
+                _view.dataGridView1.DataSource = ((List<MovimientoCajaModel>)new Connection().ExecuteQuery(_query, "monica10", "movimientocaja")).Select(s => new { s.NumeroTransacion, s.Beneficiario, s.Concepto, s.Monto, s.Fecha }).ToList();
             });
 
             _view.btnAtras.Click += new EventHandler((object sender, EventArgs e) =>
@@ -379,7 +381,8 @@ namespace MonicaExtra.Conrtroller
             {
                 if (e.RowIndex < 0) return;
                 var idObj = (short)Convert.ToInt32(_view.dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
-                objMovimientoSeleccionado = _dbContext.movimientocajas.FirstOrDefault(s => s.NumeroTransacion == idObj);
+                objMovimientoSeleccionado = ((List<MovimientoCajaModel>)new Connection().ExecuteQuery(new StringBuilder($"SELECT * FROM monicaextra.movimientocaja WHERE NumeroTransacion = {idObj}"), "monica10", "movimientocaja"))[0];
+                //objMovimientoSeleccionado = _dbContext.movimientocajas.FirstOrDefault(s => s.NumeroTransacion == idObj);
                 _view.dataGridView1.CurrentRow.Selected = true;
 
                 //  Datos Basicos
