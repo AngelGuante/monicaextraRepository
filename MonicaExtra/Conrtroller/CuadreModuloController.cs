@@ -1,5 +1,6 @@
 ﻿using MonicaExtra.Model.monicaextra;
 using MonicaExtra.Model.Reportes;
+using MonicaExtra.Utils.DB;
 using MonicaExtra.View;
 using System;
 using System.Collections.Generic;
@@ -14,15 +15,12 @@ namespace MonicaExtra.Conrtroller
         #region VARIABLES
         private readonly CuadreModulo _view;
         private readonly CajaModulo _cajaModuloView;
-        private monicaextraEntities _dbContext;
         #endregion
 
         public CuadreModuloController(CuadreModulo view, CajaModulo caja)
         {
             _view = view;
             _cajaModuloView = caja;
-            _dbContext = new monicaextraEntities();
-
             AplicarEventosAVista();
         }
 
@@ -57,7 +55,7 @@ namespace MonicaExtra.Conrtroller
         /// </summary>
         private void LlenarReporteCaja(bool buscadoPorFecha)
         {
-            List<CierreCaja> objCierreCaja = new List<CierreCaja>();
+            List<CierreCajaModel> objCierreCaja = new List<CierreCajaModel>();
 
             if (buscadoPorFecha)
             {
@@ -69,29 +67,26 @@ namespace MonicaExtra.Conrtroller
                              $"WHERE FechaProceso >= '{_view.dtpFechaDesde.Value.ToString("yyy-MM-dd")}' AND FechaProceso <= '{FechaHastaMasUno.ToString("yyy-MM-dd")}' " +
                              $"ORDER BY NumeroCierre DESC ");
 
-                using (var _dbontext2 = new monicaextraEntities())
-                {
-                    (_dbontext2.Database.SqlQuery<CierreCaja>(_query.ToString()).Select(s => new { s.NumeroCierre, s.FechaProceso, s.SaldoFinal, s.Comentario }).ToList()).ForEach(cierre =>
-                    {
-                        objCierreCaja.Add(new CierreCaja
-                        {
-                            NumeroCierre = cierre.NumeroCierre.ToString(),
-                            FechaProceso = cierre.FechaProceso,
-                            SaldoFinal = cierre.SaldoFinal.ToString(),
-                            Comentario = cierre.Comentario
-                        });
-                    });
-                }
+                ((List<CierreCajaModel>)new Connection().ExecuteQuery(_query, "monica10", "cierrecaja")).Select(s => new { s.NumeroCierre, s.FechaProceso, s.SaldoFinal, s.Comentario }).ToList().ForEach(cierre =>
+                     {
+                         objCierreCaja.Add(new CierreCajaModel
+                         {
+                             NumeroCierre = cierre.NumeroCierre,
+                             FechaProceso = cierre.FechaProceso,
+                             SaldoFinal = (int)cierre.SaldoFinal,
+                             Comentario = cierre.Comentario
+                         });
+                     });
             }
             else
             {
-                (_dbContext.cierrecajas.Take(50).OrderByDescending(x => x.NumeroCierre).ToList()).ForEach(cierre =>
+                ((List<CierreCajaModel>)new Connection().ExecuteQuery(new StringBuilder("SELECT TOP (50) * FROM monicaextra.CierreCaja ORDER BY NumeroCierre DESC"), "monica10", "cierrecaja")).Select(s => new { s.NumeroCierre, s.FechaProceso, s.SaldoFinal, s.Comentario }).ToList().ForEach(cierre =>
                 {
-                    objCierreCaja.Add(new CierreCaja
+                    objCierreCaja.Add(new CierreCajaModel
                     {
-                        NumeroCierre = cierre.NumeroCierre.ToString(),
+                        NumeroCierre = cierre.NumeroCierre,
                         FechaProceso = cierre.FechaProceso,
-                        SaldoFinal = cierre.SaldoFinal.ToString(),
+                        SaldoFinal = (int)cierre.SaldoFinal,
                         Comentario = cierre.Comentario
                     });
                 });

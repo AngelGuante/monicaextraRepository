@@ -84,6 +84,7 @@
     <Compile Include="Model\monicaextra\cierrecaja.cs">
       <DependentUpon>monicaextra.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\monicaextra\CierreCajaModel.cs" />
     <Compile Include="Model\monicaextra\clasificacionfiscal.cs">
       <DependentUpon>monicaextra.tt</DependentUpon>
     </Compile>
