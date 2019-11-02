@@ -81,64 +81,16 @@
     <Compile Include="Conrtroller\MenuModuloController.cs" />
     <Compile Include="Conrtroller\MovimientoSeleccionadoController.cs" />
     <Compile Include="Conrtroller\SeleccionEmpresaModuloController.cs" />
-    <Compile Include="Model\monicaextra\cierrecaja.cs">
-      <DependentUpon>monicaextra.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\monicaextra\CierreCajaModel.cs" />
-    <Compile Include="Model\monicaextra\clasificacionfiscal.cs">
-      <DependentUpon>monicaextra.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\monicaextra\ClasificacionFiscalModel.cs" />
-    <Compile Include="Model\monicaextra\clasificacionmovicaja.cs">
-      <DependentUpon>monicaextra.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\monicaextra\ClasificacionmovicajaModel.cs" />
-    <Compile Include="Model\monicaextra\monicaextra.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>monicaextra.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\monicaextra\monicaextra.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>monicaextra.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\monicaextra\monicaextra.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>monicaextra.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Model\monicaextra\movimientocaja.cs">
-      <DependentUpon>monicaextra.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\monicaextra\MovimientoCajaModel.cs" />
-    <Compile Include="Model\monicaextra\usuario.cs">
-      <DependentUpon>monicaextra.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\monicaextra\UsuarioModel.cs" />
     <Compile Include="Model\monica_global\EmpresaModel.cs" />
     <Compile Include="Model\Reportes\CierreCaja.cs" />
     <Compile Include="Model\Reportes\MovimientoSeleccionado.cs" />
     <Compile Include="Utils\DB\Connection.cs" />
     <Compile Include="Utils\GlobalVariables.cs" />
-    <Compile Include="Model\monica_global\empresa.cs">
-      <DependentUpon>monica_global.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\monica_global\monica_global.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>monica_global.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\monica_global\monica_global.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>monica_global.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\monica_global\monica_global.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>monica_global.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\UtilsMethods.cs" />
@@ -207,20 +159,6 @@
     <EmbeddedResource Include="View\SeleccionEmpresaModulo.resx">
       <DependentUpon>SeleccionEmpresaModulo.cs</DependentUpon>
     </EmbeddedResource>
-    <EntityDeploy Include="Model\monica_global\monica_global.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>monica_global.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <EntityDeploy Include="Model\monicaextra\monicaextra.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>monicaextra.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Model\monicaextra\monicaextra.edmx.diagram">
-      <DependentUpon>monicaextra.edmx</DependentUpon>
-    </None>
-    <None Include="Model\monica_global\monica_global.edmx.diagram">
-      <DependentUpon>monica_global.edmx</DependentUpon>
-    </None>
     <None Include="Model\Reportes\DataSource\MonicaExtra.Model.Reportes.MovimientoSeleccionado.datasource" />
     <None Include="Model\Reportes\DataSource\MonicaExtra.Model.Reportes.CierreCaja.datasource" />
     <None Include="packages.config" />
@@ -236,28 +174,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Model\monicaextra\monicaextra.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>monicaextra.edmx</DependentUpon>
-      <LastGenOutput>monicaextra.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Model\monicaextra\monicaextra.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>monicaextra.edmx</DependentUpon>
-      <LastGenOutput>monicaextra.cs</LastGenOutput>
-    </Content>
-    <Content Include="Model\monica_global\monica_global.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>monica_global.edmx</DependentUpon>
-      <LastGenOutput>monica_global.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Model\monica_global\monica_global.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>monica_global.edmx</DependentUpon>
-      <LastGenOutput>monica_global.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

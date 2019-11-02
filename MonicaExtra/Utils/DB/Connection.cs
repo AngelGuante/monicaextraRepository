@@ -10,8 +10,8 @@ namespace MonicaExtra.Utils.DB
 {
     class Connection
     {
-        private SqlConnection _monica10Conn { get; set; } = new SqlConnection("Server=MIKI\\MONICA10;Database=monica10;Trusted_Connection=True;");
-        private SqlConnection _monica10_GlovalConn { get; set; } = new SqlConnection("Server=MIKI\\MONICA10;Database=monica10_global;Trusted_Connection=True;");
+        private SqlConnection _monica10Conn { get; set; } = new SqlConnection("Data Source=INGALMONTE\\TECHNOTEL;Initial Catalog=monica10;User ID=sa;Passwor d=Admin2012");
+        private SqlConnection _monica10_GlovalConn { get; set; } = new SqlConnection("Data Source=INGALMONTE\\TECHNOTEL;Initial Catalog=monica_global;User ID=sa;Passwor d=Admin2012");
 
         private SqlConnection GetConnection(string db)
         {
@@ -54,7 +54,7 @@ namespace MonicaExtra.Utils.DB
                             cmmnd.Connection.Dispose();
                             return empresas;
                         case "movimientocaja":
-                            var Select = (query.ToString(query.ToString().IndexOf("SELECT ") + 7, query.ToString().IndexOf(" FROM") - 7)).Replace(" ", "").Replace("TOP", "").Replace("50", "").Replace("DISTINCT", "").Split(',');
+                            var Select = query.ToString(query.ToString().IndexOf("SELECT ") + 7, query.ToString().IndexOf(" FROM") - 7).Replace(" ", "").Replace("TOP", "").Replace("50", "").Replace("DISTINCT", "").Split(',');
                             List<MovimientoCajaModel> movimientos = new List<MovimientoCajaModel>();
                             using (var reader = cmmnd.ExecuteReader())
                             {
@@ -229,8 +229,8 @@ namespace MonicaExtra.Utils.DB
                     {
                         case "movimientocaja":
                             string[] campos;
-                            if (query.ToString().Contains("SELECT"))
-                                campos = (query.ToString(query.ToString().IndexOf("SELECT ") + 7, query.ToString().IndexOf(" FROM") - 7)).Replace(" ", "").Replace("TOP", "").Replace("50", "").Replace("DISTINCT", "").Split(',');
+                            if (query.ToString().Contains("INSERT"))
+                                campos = query.ToString(query.ToString().IndexOf("(") + 1, query.ToString().IndexOf(") VALUES(") - 20).Replace(" ", "").Split(',');
                             else
                                 campos = paramsUpdate;
 
@@ -272,7 +272,7 @@ namespace MonicaExtra.Utils.DB
                                     cmmnd.Parameters.Add(new SqlParameter("NumeroCierre", movimiento.NumeroCierre));
                                 else if (slct == "Estatus")
                                     cmmnd.Parameters.Add(new SqlParameter("Estatus", movimiento.Estatus));
-                                else if (slct == "Soporte")
+                                else if (slct.Contains("Soporte"))
                                     cmmnd.Parameters.Add(new SqlParameter("Soporte", movimiento.Soporte));
                             }
                             cmmnd.ExecuteNonQuery();

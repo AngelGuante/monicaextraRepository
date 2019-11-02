@@ -2,7 +2,7 @@
 
 namespace MonicaExtra.Model.Reportes
 {
-    public class CierreCaja : empresa
+    public class CierreCaja : EmpresaModel
     {
         public string NumeroCierre { get; set; }
         public string FechaProceso { get; set; }
